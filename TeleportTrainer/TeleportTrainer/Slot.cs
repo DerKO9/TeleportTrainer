@@ -46,8 +46,6 @@ namespace TeleportTrainer
 
         public void Set()
         {
-            
-
             Process process = null;
             try
             {
@@ -102,6 +100,14 @@ namespace TeleportTrainer
                 MessageBox.Show("The addresses could no be read\n\n" + e.ToString());
                 return;
             }
+        }
+
+        public void SetRecall(float x, float y, float z)
+        {
+            XPos = x;
+            YPos = y;
+            ZPos = z;
+            Recall();
         }
     }
 }
