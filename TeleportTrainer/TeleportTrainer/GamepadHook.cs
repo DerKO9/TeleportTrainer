@@ -62,7 +62,7 @@ namespace TeleportTrainer
                     joystick.Properties.BufferSize = 128;
                     joystick.Acquire();
                 }
-                catch (Exception ex)
+                catch
                 {
                     Joysticks.RemoveAt(ind);
                     ind--;
@@ -116,7 +116,7 @@ namespace TeleportTrainer
         protected string ToString(Joystick joystick, JoystickOffset button, int value)
         {
             var shortMaskMax = 0xFF00;
-            var shortMaskMin = 0xFF;
+            //var shortMaskMin = 0xFF;
 
             var originalName = button.ToString();
 
@@ -203,7 +203,7 @@ namespace TeleportTrainer
                             }
                         }
                     }
-                    catch (Exception ex)
+                    catch
                     {
                         brokenJoystick = joystick;
                         break;
@@ -217,7 +217,7 @@ namespace TeleportTrainer
                     Joysticks.RemoveAt(i);
                 }
             }
-            catch (Exception ex)
+            catch
             {
             }
         }

@@ -23,18 +23,21 @@
             Orientation="Horizontal">
             <Label Content="X:" />
             <TextBox
-                Width="70"
+                Width="Auto"
                 Height="20"
+                MinWidth="70"
                 Text="{Binding Slot1.XPos, UpdateSourceTrigger=PropertyChanged}" />
             <Label Content="Y:" />
             <TextBox
-                Width="70"
+                Width="Auto"
                 Height="20"
+                MinWidth="70"
                 Text="{Binding Slot1.YPos, UpdateSourceTrigger=PropertyChanged}" />
             <Label Content="Z:" />
             <TextBox
-                Width="70"
+                Width="Auto"
                 Height="20"
+                MinWidth="70"
                 Text="{Binding Slot1.ZPos, UpdateSourceTrigger=PropertyChanged}" />
             <Button
                 Width="50"
@@ -46,7 +49,7 @@
         <StackPanel Grid.Row="1">
             <TextBlock
                 HorizontalAlignment="Left"
-                Text="-Use Num1/LB to save position and Num3/RB to teleport to position"
+                Text="Use Num1/LB to save position and Num3/RB to teleport to position"
                 TextWrapping="Wrap" />
         </StackPanel>
 

@@ -43,7 +43,6 @@ namespace TeleportTrainer
             ReadProcessMemory((int)processHandle, address, buffer, buffer.Length, ref bytesRead);
             float value = BitConverter.ToSingle(buffer, 0);
             return Convert.ToSingle(value);
-            return 0;
         }
 
         public void WriteValue(float value)
