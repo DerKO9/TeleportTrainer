@@ -1,2 +1,2 @@
 # TeleportTrainer
-Teleports you to whatever X Y z coordinates you want.
+Teleports you to whatever X Y Z coordinates you want.
