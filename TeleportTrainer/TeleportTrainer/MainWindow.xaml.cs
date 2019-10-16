@@ -79,5 +79,38 @@ namespace TeleportTrainer
         {
             Slot1.Recall();
         }
+
+        private void PresetButton_Click(object sender, RoutedEventArgs e)
+        {
+            switch ((sender as Button)?.Name)
+            {
+                case "_boss1Button":
+                    Slot1.SetRecall(560, 1, 0);
+                    break;
+                case "_boss2Button":
+                    Slot1.SetRecall(510, 62, 0);
+                    break;
+                case "_boss3Button":
+                    Slot1.SetRecall(506, 428, 0);
+                    break;
+                case "_boss4Button":
+                    Slot1.SetRecall(144, 71, 0);
+                    break;
+                case "_part1Button":
+                    Slot1.SetRecall(-133, -80, 0);
+                    break;
+                case "_part2Button":
+                    Slot1.SetRecall(-96, -2, 0);
+                    break;
+                case "_part3Button":
+                    Slot1.SetRecall(-144, 0, 0);
+                    break;
+                case "_part4Button":
+                    Slot1.SetRecall(-5, 4, 0);
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }
