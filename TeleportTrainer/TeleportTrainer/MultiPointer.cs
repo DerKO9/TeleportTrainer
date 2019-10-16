@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace ReadWriteProcessMemory
+namespace TeleportTrainer
 {
     public sealed class MultiPointer
     {
@@ -37,35 +37,22 @@ namespace ReadWriteProcessMemory
         public float ReadValue()
         {
             IntPtr processHandle = OpenProcess(PROCESS_ALL_ACCESS, false, Process.Id);
-            try{
-                long address = GetAddress(processHandle);
-                int bytesRead = 0;
-                byte[] buffer = new byte[4];
-                ReadProcessMemory((int)processHandle, address, buffer, buffer.Length, ref bytesRead);
-                float value = BitConverter.ToSingle(buffer, 0);
-                return Convert.ToSingle(value);
-            }
-            catch
-            {
-                MessageBox.Show("Couldn't read address");
-            }
+            long address = GetAddress(processHandle);
+            int bytesRead = 0;
+            byte[] buffer = new byte[4];
+            ReadProcessMemory((int)processHandle, address, buffer, buffer.Length, ref bytesRead);
+            float value = BitConverter.ToSingle(buffer, 0);
+            return Convert.ToSingle(value);
             return 0;
         }
 
         public void WriteValue(float value)
         {
             IntPtr processHandle = OpenProcess(PROCESS_ALL_ACCESS, false, Process.Id);
-            try
-            {
-                long address = GetAddress(processHandle);
-                int bytesRead = 0;
-                byte[] buffer = BitConverter.GetBytes(value);
-                WriteProcessMemory((int)processHandle, address, buffer, buffer.Length, ref bytesRead);
-            }
-            catch
-            {
-                MessageBox.Show("Couldn't read address");
-            }
+            long address = GetAddress(processHandle);
+            int bytesRead = 0;
+            byte[] buffer = BitConverter.GetBytes(value);
+            WriteProcessMemory((int)processHandle, address, buffer, buffer.Length, ref bytesRead);
         }
 
         private long GetAddress(IntPtr processHandle)
@@ -89,15 +76,15 @@ namespace ReadWriteProcessMemory
 
             for (int i = 0; i < Offsets.Length-1; i++)
             {
-                //if (value <= 0x1000 || value >= 0xFFFFFFFF)
-                //    throw new ArgumentNullException();
+                if (value <= 0x1000)
+                    throw new ArgumentNullException();
                 address = value + Offsets[i];
                 ReadProcessMemory((int)processHandle, address, buffer, buffer.Length, ref bytesRead);
                 value = BitConverter.ToInt64(buffer, 0);
             }
 
-            //if (value <= 0x1000 || value >= 0xFFFFFFFF)
-            //    throw new ArgumentNullException();
+            if (value <= 0x1000)
+                throw new ArgumentNullException();
             address = value + Offsets.Last();
 
             return address;

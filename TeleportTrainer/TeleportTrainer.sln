@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29409.12
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeleportTrainer", "TeleportTrainer\TeleportTrainer.csproj", "{565E5713-2738-42A7-BE3B-2788A4056102}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeleportTrainer", "TeleportTrainer\TeleportTrainer.csproj", "{E6A428AD-D8BA-4FC1-8078-88F1475E50EF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{565E5713-2738-42A7-BE3B-2788A4056102}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{565E5713-2738-42A7-BE3B-2788A4056102}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{565E5713-2738-42A7-BE3B-2788A4056102}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{565E5713-2738-42A7-BE3B-2788A4056102}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6A428AD-D8BA-4FC1-8078-88F1475E50EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6A428AD-D8BA-4FC1-8078-88F1475E50EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6A428AD-D8BA-4FC1-8078-88F1475E50EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6A428AD-D8BA-4FC1-8078-88F1475E50EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {000704B6-9AC7-41F7-84D2-670143FF5419}
+		SolutionGuid = {77442D16-A240-4738-B7B5-5DC9D456E8A6}
 	EndGlobalSection
 EndGlobal
