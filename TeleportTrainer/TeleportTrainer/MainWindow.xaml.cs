@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -19,12 +20,27 @@ namespace TeleportTrainer
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
         private KeyboardHook _keyboardHook;
         private GamepadHook _gamepadHook;
+        private string _currentPosDisplay;
+
+        public string CurrentPosDisplay
+        {
+            get => _currentPosDisplay;
+            set
+            {
+                _currentPosDisplay = value;
+                PropertyChanged(this, new PropertyChangedEventArgs(nameof(CurrentPosDisplay)));
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public Slot Slot1 { get; } = new Slot();
+        public Slot Slot2 { get; } = new Slot();
+        public Slot Slot3 { get; } = new Slot();
 
         public MainWindow()
         {
@@ -37,20 +53,43 @@ namespace TeleportTrainer
             _keyboardHook = new KeyboardHook();
             _keyboardHook.RegisterHotKey(System.Windows.Forms.Keys.NumPad1);
             _keyboardHook.RegisterHotKey(System.Windows.Forms.Keys.NumPad3);
+            _keyboardHook.RegisterHotKey(System.Windows.Forms.Keys.NumPad4);
+            _keyboardHook.RegisterHotKey(System.Windows.Forms.Keys.NumPad6);
             _keyboardHook.KeyPressed += KeyBoardKeyPressed;
 
-            StartPolling();
+            StartPollingInput();
+            StartPollingCurrentPos();
         }
 
-        private async void StartPolling()
+        private async void StartPollingInput()
         {
             await Task.Run(() =>
             {
                 while (true)
                 {
-                    Thread.Sleep(10);
+                    Thread.Sleep(25);
                     _gamepadHook.Poll();
                     _keyboardHook.Poll();
+                }
+            });
+        }
+
+        private async void StartPollingCurrentPos()
+        {
+            await Task.Run(() =>
+            {
+                while (true)
+                {
+                    Thread.Sleep(100);
+                    try
+                    {
+                        Point point = PosReader.ReadCurrentPos();
+                        CurrentPosDisplay = $"Current Position X: {point.X}   Y: {point.Y}   Z: {point.Z}";
+                    }
+                    catch 
+                    {
+                        CurrentPosDisplay = $"Can't read position";
+                    }
                 }
             });
         }
@@ -58,55 +97,73 @@ namespace TeleportTrainer
         private void KeyBoardKeyPressed(object sender, System.Windows.Forms.KeyEventArgs e)
         {
             Console.WriteLine(e.KeyCode.ToString());
-            if (e.KeyCode == System.Windows.Forms.Keys.NumPad1)
-                Slot1.Set();
+            if (e.KeyCode == System.Windows.Forms.Keys.NumPad4)
+                Slot1.SaveCurrentPos();
+            else if (e.KeyCode == System.Windows.Forms.Keys.NumPad6)
+                Slot1.RecallSavedPos();
+            else if (e.KeyCode == System.Windows.Forms.Keys.NumPad1)
+                Slot2.SaveCurrentPos();
             else if (e.KeyCode == System.Windows.Forms.Keys.NumPad3)
-                Slot1.Recall();
+                Slot2.RecallSavedPos();
         }
 
         private void ControllerButtonPressed(object sender, GamepadButton e)
         {
             Console.WriteLine(e.Button.ToString());
-            if (e.Button.ToString() == "Buttons4")
-                Slot1.Set();
-            else if (e.Button.ToString() == "Buttons5")
+            if (e.Button.ToString() == "RotationX+")
+                Slot1.SaveCurrentPos();
+            else if (e.Button.ToString() == "RotationX-")
             {
-                Slot1.Recall();
+                Slot1.RecallSavedPos();
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void GoButton_Click(object sender, RoutedEventArgs e)
         {
-            Slot1.Recall();
+            switch ((sender as Button)?.Name)
+            {
+                case "_GoButton1":
+                    Slot1.RecallSavedPos();
+                    break;
+                case "_GoButton2":
+                    Slot2.RecallSavedPos();
+                    break;
+            }
         }
 
         private void PresetButton_Click(object sender, RoutedEventArgs e)
         {
             switch ((sender as Button)?.Name)
             {
-                case "_boss1Button":
+                case nameof(_tutorialEndButton):
                     Slot1.SetRecall(560, 1, 0);
                     break;
-                case "_boss2Button":
-                    Slot1.SetRecall(510, 62, 0);
-                    break;
-                case "_boss3Button":
-                    Slot1.SetRecall(506, 428, 0);
-                    break;
-                case "_boss4Button":
-                    Slot1.SetRecall(144, 71, 0);
-                    break;
-                case "_part1Button":
+                case nameof(_Part1Start):
                     Slot1.SetRecall(-133, -80, 0);
                     break;
-                case "_part2Button":
+                case nameof(_Part2Start):
                     Slot1.SetRecall(-96, -2, 0);
                     break;
-                case "_part3Button":
+                case nameof(_Part3Start):
                     Slot1.SetRecall(-144, 0, 0);
                     break;
-                case "_part4Button":
+                case nameof(_Part4Start):
                     Slot1.SetRecall(-5, 4, 0);
+                    break;
+                case nameof(_BossStart):
+                    Slot1.SetRecall(-284, 2, 0);
+                    break;
+                case nameof(_Part1End):
+                    Slot1.SetRecall(510, 62, 0);
+                    break;
+                case nameof(_Part2End):
+                    Slot1.SetRecall(506, 428, 0);
+                    break;
+                case nameof(_Part3End):
+                    Slot1.SetRecall(144, 71, 0);
+                    break;
+                case nameof(_Part4End):
+                    Slot1.SetRecall(0, 0, 0);
                     break;
                 default:
                     break;
