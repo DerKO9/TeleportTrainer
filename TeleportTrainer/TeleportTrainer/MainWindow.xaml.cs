@@ -40,7 +40,8 @@ namespace TeleportTrainer
 
         public Slot Slot1 { get; } = new Slot();
         public Slot Slot2 { get; } = new Slot();
-        public Slot Slot3 { get; } = new Slot();
+
+        public string LastButton { get; set; }
 
         public MainWindow()
         {
@@ -86,9 +87,9 @@ namespace TeleportTrainer
                         Point point = PosReader.ReadCurrentPos();
                         CurrentPosDisplay = $"Current Position X: {point.X}   Y: {point.Y}   Z: {point.Z}";
                     }
-                    catch 
+                    catch (Exception e)
                     {
-                        CurrentPosDisplay = $"Can't read position";
+                        CurrentPosDisplay = $"Error: Can not read position. {e.Message}";
                     }
                 }
             });
@@ -109,13 +110,25 @@ namespace TeleportTrainer
 
         private void ControllerButtonPressed(object sender, GamepadButton e)
         {
-            Console.WriteLine(e.Button.ToString());
-            if (e.Button.ToString() == "RotationX+")
-                Slot1.SaveCurrentPos();
-            else if (e.Button.ToString() == "RotationX-")
+            string buttonName = e.Button.ToString();
+            Console.WriteLine(buttonName);
+
+            if (LastButton == "Buttons9")
             {
-                Slot1.RecallSavedPos();
+                if (buttonName == "RotationX+")
+                    Slot1.SaveCurrentPos();
+                if (buttonName == "RotationX-")
+                    Slot2.SaveCurrentPos();
             }
+            else
+            {
+                if (buttonName == "RotationX+")
+                    Slot1.RecallSavedPos();
+                if (buttonName == "RotationX-")
+                    Slot2.RecallSavedPos();
+            }
+
+            LastButton = buttonName;
         }
 
         private void GoButton_Click(object sender, RoutedEventArgs e)
@@ -163,7 +176,7 @@ namespace TeleportTrainer
                     Slot1.SetRecall(144, 71, 0);
                     break;
                 case nameof(_Part4End):
-                    Slot1.SetRecall(0, 0, 0);
+                    Slot1.SetRecall(1060, -110, 0);
                     break;
                 default:
                     break;
