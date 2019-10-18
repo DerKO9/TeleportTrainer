@@ -43,6 +43,10 @@ namespace TeleportTrainer
 
         public string LastButton { get; set; }
 
+        public string CurrentlyPressedButton { get; set; }
+
+        public bool IsControllerEnabled { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
@@ -112,23 +116,24 @@ namespace TeleportTrainer
         {
             string buttonName = e.Button.ToString();
             Console.WriteLine(buttonName);
-
-            if (LastButton == "Buttons9")
+            if (IsControllerEnabled)
             {
-                if (buttonName == "RotationX+")
-                    Slot1.SaveCurrentPos();
-                if (buttonName == "RotationX-")
-                    Slot2.SaveCurrentPos();
+                if (LastButton == "Buttons9")
+                {
+                    if (buttonName == "RotationX+")
+                        Slot1.SaveCurrentPos();
+                    if (buttonName == "RotationX-")
+                        Slot2.SaveCurrentPos();
+                }
+                else
+                {
+                    if (buttonName == "RotationX+")
+                        Slot1.RecallSavedPos();
+                    if (buttonName == "RotationX-")
+                        Slot2.RecallSavedPos();
+                }
+                LastButton = buttonName;
             }
-            else
-            {
-                if (buttonName == "RotationX+")
-                    Slot1.RecallSavedPos();
-                if (buttonName == "RotationX-")
-                    Slot2.RecallSavedPos();
-            }
-
-            LastButton = buttonName;
         }
 
         private void GoButton_Click(object sender, RoutedEventArgs e)
@@ -140,6 +145,12 @@ namespace TeleportTrainer
                     break;
                 case "_GoButton2":
                     Slot2.RecallSavedPos();
+                    break;
+                case "_SetButton1":
+                    Slot1.SaveCurrentPos();
+                    break;
+                case "_SetButton2":
+                    Slot2.SaveCurrentPos();
                     break;
             }
         }

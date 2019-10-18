@@ -5,8 +5,8 @@
         xmlns:local="clr-namespace:TeleportTrainer"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         Title="Teleport Trainer 1.0 (Made by DerKO)"
-        Width="420"
-        Height="200"
+        Width="480"
+        Height="240"
         Icon="Yl.ico"
         mc:Ignorable="d">
     <Grid>
@@ -31,19 +31,26 @@
             <TextBox Width="Auto"
                      Height="20"
                      MinWidth="70"
-                     Text="{Binding Slot1.Position.X, UpdateSourceTrigger=PropertyChanged}" />
+                     Text="{Binding Slot1.Position.X, StringFormat=0.####, UpdateSourceTrigger=PropertyChanged}" />
 
             <Label Content="Y:" />
             <TextBox Width="Auto"
                      Height="20"
                      MinWidth="70"
-                     Text="{Binding Slot1.Position.Y, UpdateSourceTrigger=PropertyChanged}" />
+                     Text="{Binding Slot1.Position.Y, StringFormat=0.####, UpdateSourceTrigger=PropertyChanged}" />
 
             <Label Content="Z:" />
             <TextBox Width="Auto"
                      Height="20"
                      MinWidth="70"
-                     Text="{Binding Slot1.Position.Z, UpdateSourceTrigger=PropertyChanged}" />
+                     Text="{Binding Slot1.Position.Z, StringFormat=0.####, UpdateSourceTrigger=PropertyChanged}" />
+
+            <Button x:Name="_SetButton1"
+                    Width="65"
+                    Height="20"
+                    Margin="5,0,0,0"
+                    Click="GoButton_Click"
+                    Content="SetCurrent" />
 
             <Button x:Name="_GoButton1"
                     Width="60"
@@ -62,19 +69,26 @@
             <TextBox Width="Auto"
                      Height="20"
                      MinWidth="70"
-                     Text="{Binding Slot2.Position.X, UpdateSourceTrigger=PropertyChanged}" />
+                     Text="{Binding Slot2.Position.X, StringFormat=0.####, UpdateSourceTrigger=PropertyChanged}" />
 
             <Label Content="Y:" />
             <TextBox Width="Auto"
                      Height="20"
                      MinWidth="70"
-                     Text="{Binding Slot2.Position.Y, UpdateSourceTrigger=PropertyChanged}" />
+                     Text="{Binding Slot2.Position.Y, StringFormat=0.####, UpdateSourceTrigger=PropertyChanged}" />
 
             <Label Content="Z:" />
             <TextBox Width="Auto"
                      Height="20"
                      MinWidth="70"
-                     Text="{Binding Slot2.Position.Z, UpdateSourceTrigger=PropertyChanged}" />
+                     Text="{Binding Slot2.Position.Z, StringFormat=0.####, UpdateSourceTrigger=PropertyChanged}" />
+
+            <Button x:Name="_SetButton2"
+                    Width="65"
+                    Height="20"
+                    Margin="5,0,0,0"
+                    Click="GoButton_Click"
+                    Content="SetCurrent" />
 
             <Button x:Name="_GoButton2"
                     Width="60"
@@ -174,6 +188,11 @@
                         Content="P4End" />
             </Grid>
         </StackPanel>
+
+        <CheckBox Grid.Row="4"
+                  Margin="20,10,0,0"
+                  Content="Enable Controller"
+                  IsChecked="{Binding IsControllerEnabled}" />
 
     </Grid>
 </Window>
