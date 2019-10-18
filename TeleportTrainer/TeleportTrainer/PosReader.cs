@@ -20,8 +20,7 @@ namespace TeleportTrainer
             }
             catch (Exception e)
             {
-                MessageBox.Show("YookaLaylee process couldn't be found\n\n" + e.ToString());
-                return null;
+                throw new Exception("YookaLayleeIL process could not be found.");
             }
             MultiPointer xPosPointer = new MultiPointer(process, "UnityPlayer.dll", 0x0144DD68, new long[] { 0x128, 0x18, 0x10, 0xA0 });
             MultiPointer yPosPointer = new MultiPointer(process, "UnityPlayer.dll", 0x0144DD68, new long[] { 0x128, 0x18, 0x10, 0xA4 });
@@ -34,8 +33,7 @@ namespace TeleportTrainer
             }
             catch (Exception e)
             {
-                MessageBox.Show("The addresses could no be read\n\n" + e.ToString());
-                return null;
+                throw new Exception("Could not read XYZ addresses.");
             }
             return point;
         }
@@ -49,7 +47,7 @@ namespace TeleportTrainer
             }
             catch (Exception e)
             {
-                MessageBox.Show("YookaLaylee process couldn't be found\n\n" + e.ToString());
+                //MessageBox.Show("YookaLaylee process couldn't be found\n\n" + e.ToString());
                 return;
             }
             MultiPointer xPosPointer = new MultiPointer(process, "UnityPlayer.dll", 0x0144DD68, new long[] { 0x128, 0x18, 0x10, 0xA0 });
@@ -63,7 +61,7 @@ namespace TeleportTrainer
             }
             catch (Exception e)
             {
-                MessageBox.Show("The addresses could no be read\n\n" + e.ToString());
+                //MessageBox.Show("The addresses could no be read\n\n" + e.ToString());
                 return;
             }
         }

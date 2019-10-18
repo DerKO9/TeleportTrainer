@@ -5,7 +5,7 @@
         xmlns:local="clr-namespace:TeleportTrainer"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         Title="TeleportTrainer"
-        Width="400"
+        Width="420"
         Height="200"
         Icon="Resources/YLTPTrainer.ico"
         mc:Ignorable="d">
@@ -17,9 +17,11 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        
-        <TextBlock Text="{Binding CurrentPosDisplay}" Margin="10,0,0,0"/>
-        
+
+        <TextBlock Margin="10,0,0,0"
+                   Text="{Binding CurrentPosDisplay}"
+                   TextWrapping="Wrap" />
+
         <StackPanel Grid.Row="1"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
@@ -50,7 +52,7 @@
                     Click="GoButton_Click"
                     Content="GO" />
         </StackPanel>
-        
+
         <StackPanel Grid.Row="2"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
@@ -81,7 +83,7 @@
                     Click="GoButton_Click"
                     Content="GO" />
         </StackPanel>
-        
+
         <StackPanel Grid.Row="3">
             <Label Margin="20,0,0,0"
                    Content="Impossible Lair Presets:"
