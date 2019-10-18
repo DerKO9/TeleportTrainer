@@ -149,7 +149,7 @@ namespace TeleportTrainer
             switch ((sender as Button)?.Name)
             {
                 case nameof(_tutorialEndButton):
-                    Slot1.SetRecall(560, 1, 0);
+                    Slot1.SetRecall(650, -1, 0);
                     break;
                 case nameof(_Part1Start):
                     Slot1.SetRecall(-133, -80, 0);
