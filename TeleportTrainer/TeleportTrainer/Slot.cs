@@ -37,6 +37,7 @@ namespace TeleportTrainer
             Position.X = x;
             Position.Y = y;
             Position.Z = z;
+            PropertyChanged(this, new PropertyChangedEventArgs(nameof(Position)));
         }
 
         public void SetRecall(float x, float y, float z)
