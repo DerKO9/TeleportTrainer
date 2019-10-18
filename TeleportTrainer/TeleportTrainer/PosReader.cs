@@ -18,7 +18,7 @@ namespace TeleportTrainer
             {
                 process = Process.GetProcessesByName("YLILWin64")[0]; //"YLILWin64" "YookaLaylee64"
             }
-            catch (Exception e)
+            catch
             {
                 throw new Exception("YookaLayleeIL process could not be found.");
             }
@@ -31,7 +31,7 @@ namespace TeleportTrainer
                 point.Y = yPosPointer.ReadValue();
                 point.Z = zPosPointer.ReadValue();
             }
-            catch (Exception e)
+            catch
             {
                 throw new Exception("Could not read XYZ addresses.");
             }
@@ -45,7 +45,7 @@ namespace TeleportTrainer
             {
                 process = Process.GetProcessesByName("YLILWin64")[0]; //"YLILWin64" "YookaLaylee64"
             }
-            catch (Exception e)
+            catch
             {
                 //MessageBox.Show("YookaLaylee process couldn't be found\n\n" + e.ToString());
                 return;
@@ -59,7 +59,7 @@ namespace TeleportTrainer
                 yPosPointer.WriteValue(point.Y);
                 zPosPointer.WriteValue(point.Z);
             }
-            catch (Exception e)
+            catch
             {
                 //MessageBox.Show("The addresses could no be read\n\n" + e.ToString());
                 return;

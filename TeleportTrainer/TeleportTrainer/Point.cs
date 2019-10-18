@@ -9,8 +9,6 @@ namespace TeleportTrainer
 {
     public class Point
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
         public float X { get; set; }
         public float Y { get; set; }
         public float Z { get; set; }
